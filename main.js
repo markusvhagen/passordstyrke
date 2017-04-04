@@ -16,16 +16,23 @@ function sjekk_styrke() {
             3. Siffer; 2 eller mer siffer gir 1 poeng.
     */
 
-
-    // Mottar passord og splitter passordet til en liste med alle de inviduelle tegnene i strengen. Definerer samt variabelen for lengde
     var passord = document.getElementById("passord").value;
     var passord_split = passord.split("");
     var lengde = passord.length;
 
-    // Lengden på passord
+    /* Lengden på passord */
+
+    // Hvis lengden ikke har oversteget 8 tegn en eneste gang enda.
     if (lengde >= 8 && lengde_sjekk == false) {
         styrke_maaler += 1;
-        lengde_sjekk = true; // Unngår med denne at man kan gå fram og tilbake mellom 8 for å legge til 1 på styrkemåleren.
+        lengde_sjekk = true; // Unngår med denne at man kan gå fram og tilbake mellom 8 for å legge til 1 på styrkemåleren. Altså, 1, 2, 3, 4 osv.
+    }
+
+    // Hvis lengden er under 8, men har vært over 8. Denne er viktig slik at styrke_maaler ikke holder seg på += 1, etter funksjonen over.
+    // Uten denne ville man fått 1 poeng fra lengden uansett hva lengden er, så lenge lengden har vært over 8 én gang.
+    else if (lengde < 8 && lengde_sjekk == true) {
+        styrke_maaler -= 1;
+        lengde_sjekk = false;
     }
 
     switch(styrke_maaler) {
@@ -42,6 +49,6 @@ function sjekk_styrke() {
             styrke_resultat = "Skriv et passord";
     }
 
-    styrke_output.innerHTML = styrke_svar;
+    styrke_output.innerHTML = styrke_resultat;
     console.log(styrke_maaler + " " + lengde)
 }

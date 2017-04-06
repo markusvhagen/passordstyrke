@@ -1,16 +1,11 @@
 var styrke_output = document.getElementById("styrke");
-var store_bokstaver = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
-"T", "U", "V", "W", "X", "Y", "Z"];
-var bokstaver_lengde = store_bokstaver.length;
-var siffer = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-var siffer_lengde = siffer.length;
 var styrke_maaler = 0;
-var styrke_resultat;
 var antall_store_bokstaver = 0;
 var antall_siffer = 0;
 var lengde_sjekk = false;
 var store_bokstaver_sjekk = false;
 var siffer_sjekk = false;
+var styrke_resultat;
 
 function sjekk_styrke() {
     /*
@@ -23,7 +18,6 @@ function sjekk_styrke() {
     */
 
     var passord = document.getElementById("passord").value;
-    var passord_siffer_sjekk = passord;
     var lengde = passord.length;
 
     /* Lengden */
@@ -101,6 +95,4 @@ function sjekk_styrke() {
       styrke_output.innerHTML = "";
       styrke_maaler = 0;
     }
-
-    console.log(styrke_maaler + " Antall siffer = " + antall_siffer + " Antall store bokstaver = " + antall_store_bokstaver)
 }

@@ -7,7 +7,7 @@ var siffer_lengde = siffer.length;
 var styrke_maaler = 0;
 var styrke_resultat;
 var antall_store_bokstaver = 0;
-var siffer_antall = 0;
+var antall_siffer = 0;
 var lengde_sjekk = false;
 var store_bokstaver_sjekk = false;
 var siffer_sjekk = false;
@@ -55,11 +55,20 @@ function sjekk_styrke() {
     }
 
 
+    /* Antall siffer */
 
-    /* else if (store_bokstaver_sjekk == true && antall_store_bokstaver >= 2) {
+    antall_siffer = passord.replace(/[0-9]/g, "").length;
 
+    if (siffer_sjekk == false && antall_siffer == 2) {
+        styrke_maaler += 1;
+        siffer_sjekk == true;
     }
-    */
+
+    else if (siffer_sjekk == true && antall_siffer < 2) {
+        styrke_maaler -= 1;
+        siffer_sjekk == true;
+    }
+
     /* Bestemmer passordstyrken utifra faktorene */
 
     switch(styrke_maaler) {

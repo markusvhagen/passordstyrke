@@ -1,9 +1,12 @@
 var styrke_output = document.getElementById("styrke");
-var smaa_bokstaver = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 var store_bokstaver = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var bokstaver_lengde = store_bokstaver.length;
 var siffer = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var siffer_lengde = siffer.length;
 var styrke_maaler = 0;
 var styrke_resultat;
+var antall_store_bokstaver = 0;
+var siffer_antall = 0;
 var lengde_sjekk = false;
 
 function sjekk_styrke() {
@@ -20,7 +23,7 @@ function sjekk_styrke() {
     var passord_split = passord.split("");
     var lengde = passord.length;
 
-    /* Lengden på passord */
+    /* Lengden */
 
     // Hvis lengden ikke har oversteget 8 tegn en eneste gang enda.
     if (lengde >= 8 && lengde_sjekk == false) {
@@ -35,20 +38,40 @@ function sjekk_styrke() {
         lengde_sjekk = false;
     }
 
+    /* Antall store bokstaver */
+    for (var i = 0; i < bokstaver_lengde; i++) {
+    }
+
+    /* Bestemmer passordstyrken utifra faktorene */
+
     switch(styrke_maaler) {
         case 1:
             styrke_resultat = "Svakt";
+            styrke_output.style.color = "red";
             break;
         case 2:
             styrke_resultat = "Middels";
+            styrke_output.style.color = "orange";
             break;
         case 3:
             styrke_resultat = "Sterkt";
+            styrke_output.style.color = "lightgreen";
             break;
         default:
-            styrke_resultat = "Skriv et passord";
+            styrke_resultat = "Svært svakt";
+            styrke_output.style.color = "lightgray";
     }
 
-    styrke_output.innerHTML = styrke_resultat;
+    /* Output-fase */
+
+
+    if (lengde >= 1) {
+      styrke_output.innerHTML = styrke_resultat;
+    }
+
+    else {
+      styrke_output.innerHTML = "";
+    }
+
     console.log(styrke_maaler + " " + lengde)
 }

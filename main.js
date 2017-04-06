@@ -23,6 +23,7 @@ function sjekk_styrke() {
     */
 
     var passord = document.getElementById("passord").value;
+    var passord_siffer_sjekk = passord;
     var lengde = passord.length;
 
     /* Lengden */
@@ -44,29 +45,29 @@ function sjekk_styrke() {
 
     antall_store_bokstaver = passord.replace(/[^A-Z]/g, "").length;
 
-    if (store_bokstaver_sjekk == false && antall_store_bokstaver == 2) {
+    if (store_bokstaver_sjekk == false && antall_store_bokstaver >= 2) {
         styrke_maaler += 1;
-        store_bokstaver_sjekk == true;
+        store_bokstaver_sjekk = true;
     }
 
     else if (store_bokstaver_sjekk == true && antall_store_bokstaver < 2) {
         styrke_maaler -= 1;
-        store_bokstaver_sjekk == false;
+        store_bokstaver_sjekk = false;
     }
 
 
     /* Antall siffer */
 
-    antall_siffer = passord.replace(/[0-9]/g, "").length;
+    antall_siffer = passord.replace(/[^0-9]/g, "").length;
 
-    if (siffer_sjekk == false && antall_siffer == 2) {
+    if (siffer_sjekk == false && antall_siffer >= 2) {
         styrke_maaler += 1;
-        siffer_sjekk == true;
+        siffer_sjekk = true;
     }
 
     else if (siffer_sjekk == true && antall_siffer < 2) {
         styrke_maaler -= 1;
-        siffer_sjekk == true;
+        siffer_sjekk = false;
     }
 
     /* Bestemmer passordstyrken utifra faktorene */
@@ -74,19 +75,19 @@ function sjekk_styrke() {
     switch(styrke_maaler) {
         case 1:
             styrke_resultat = "Svakt";
-            styrke_output.style.color = "red";
+            styrke_output.style.color = "#FF5468";
             break;
         case 2:
             styrke_resultat = "Middels";
-            styrke_output.style.color = "orange";
+            styrke_output.style.color = "FABE4D";
             break;
         case 3:
             styrke_resultat = "Sterkt";
-            styrke_output.style.color = "lightgreen";
+            styrke_output.style.color = "#4DFA90";
             break;
         default:
             styrke_resultat = "Svært svakt";
-            styrke_output.style.color = "gray";
+            styrke_output.style.color = "#525252";
     }
 
     /* Output-fase */
@@ -98,7 +99,8 @@ function sjekk_styrke() {
 
     else {
       styrke_output.innerHTML = "";
+      styrke_maaler = 0;
     }
 
-    console.log(styrke_maaler + " " + antall_store_bokstaver)
+    console.log(styrke_maaler + " Antall siffer = " + antall_siffer + " Antall store bokstaver = " + antall_store_bokstaver)
 }

@@ -1,5 +1,6 @@
 var styrke_output = document.getElementById("styrke");
-var store_bokstaver = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var store_bokstaver = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
+"T", "U", "V", "W", "X", "Y", "Z"];
 var bokstaver_lengde = store_bokstaver.length;
 var siffer = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var siffer_lengde = siffer.length;
@@ -8,6 +9,8 @@ var styrke_resultat;
 var antall_store_bokstaver = 0;
 var siffer_antall = 0;
 var lengde_sjekk = false;
+var store_bokstaver_sjekk = false;
+var siffer_sjekk = false;
 
 function sjekk_styrke() {
     /*
@@ -20,7 +23,6 @@ function sjekk_styrke() {
     */
 
     var passord = document.getElementById("passord").value;
-    var passord_split = passord.split("");
     var lengde = passord.length;
 
     /* Lengden */
@@ -39,9 +41,25 @@ function sjekk_styrke() {
     }
 
     /* Antall store bokstaver */
-    for (var i = 0; i < bokstaver_lengde; i++) {
+
+    antall_store_bokstaver = passord.replace(/[^A-Z]/g, "").length;
+
+    if (store_bokstaver_sjekk == false && antall_store_bokstaver == 2) {
+        styrke_maaler += 1;
+        store_bokstaver_sjekk == true;
     }
 
+    else if (store_bokstaver_sjekk == true && antall_store_bokstaver < 2) {
+        styrke_maaler -= 1;
+        store_bokstaver_sjekk == false;
+    }
+
+
+
+    /* else if (store_bokstaver_sjekk == true && antall_store_bokstaver >= 2) {
+
+    }
+    */
     /* Bestemmer passordstyrken utifra faktorene */
 
     switch(styrke_maaler) {
@@ -59,7 +77,7 @@ function sjekk_styrke() {
             break;
         default:
             styrke_resultat = "Svært svakt";
-            styrke_output.style.color = "lightgray";
+            styrke_output.style.color = "gray";
     }
 
     /* Output-fase */
@@ -73,5 +91,5 @@ function sjekk_styrke() {
       styrke_output.innerHTML = "";
     }
 
-    console.log(styrke_maaler + " " + lengde)
+    console.log(styrke_maaler + " " + antall_store_bokstaver)
 }
